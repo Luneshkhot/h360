@@ -1,0 +1,52 @@
+# Naming the components on the current agent.
+Agent.sources = ftp
+Agent.channels = MemChannel
+Agent.sinks = HDFS
+
+# Describing/Configuring the source
+Agent.sources.ftp.type = org.keedio.flume.source.ftp.source.Source
+Agent.sources.ftp.client.source = ftp
+
+# Connection properties for ftp server
+Agent.sources.ftp.name.server = 192.168.0.4
+Agent.sources.ftp.port = 21
+
+Agent.sources.ftp.user = dharshekthvel
+Agent.sources.ftp.password = WhiteTiger$31
+
+Agent.sources.ftp.folder = /home/dharshekthvel
+Agent.sources.ftp.file.name = history_1.txt
+
+# Discover delay, each configured milisecond directory will be explored
+Agent.sources.ftp.run.discover.delay=5000
+
+# Process by lines
+Agent.sources.ftp.flushlines = true
+
+
+
+
+# Describing/Configuring the sink
+
+Agent.sinks.HDFS.type = hdfs
+Agent.sinks.HDFS.hdfs.path = hdfs://localhost:9000/
+Agent.sinks.HDFS.hdfs.fileType = DataStream
+Agent.sinks.HDFS.hdfs.writeFormat = Text
+Agent.sinks.HDFS.hdfs.batchSize = 1000
+Agent.sinks.HDFS.hdfs.rollSize = 0
+Agent.sinks.HDFS.hdfs.rollCount = 10000
+
+# Describing/Configuring the channel TwitterAgent.channels.MemChannel.type = memory
+Agent.channels.MemChannel.capacity = 10000
+Agent.channels.MemChannel.transactionCapacity = 100
+
+# Binding the source and sink to the channel
+Agent.sources.Twitter.channels = MemChannel
+Agent.sinks.HDFS.channel = MemChannel
+
+
+############################################################################################################################
+
+#./flume-ng agent --conf ../conf/ -f ../conf/flume-ftp-hdfs.conf Dflume.root.logger=DEBUG,console -n Agent
+
+############################################################################################################################

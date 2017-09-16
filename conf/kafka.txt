@@ -1,0 +1,29 @@
+
+
+# Start the zookeeper first
+bin/zookeeper-server-start.sh
+./zookeeper-server-start.sh config/zookeeper.properties
+
+# Then start the kafka server
+
+bin/kafka-server-start.sh
+kafka-server-start.sh config/server.properties
+
+
+# Create a topic
+
+bin/kafka-topics.sh
+./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic MYIBM
+
+
+# List the topic
+
+bin/kafka-topics.sh
+./kafka-topics.sh --list --zookeeper localhost:2181
+
+
+# Producer - Send some messages to the topic
+
+bin/kafka-console-producer.sh
+./kafka-console-producer.sh --broker-list localhost:9092 --topic MYIBM
+

@@ -1,0 +1,4 @@
+
+
+# Elastic search port
+http://localhost:9200/hash360index/_search
